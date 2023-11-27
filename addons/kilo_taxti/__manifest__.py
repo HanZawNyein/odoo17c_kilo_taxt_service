@@ -6,6 +6,9 @@
         "security/ir.model.access.csv",
 
         "views/kilo_booking.xml",
+        "views/res_config_settings.xml",
+
+
         "views/menus.xml",
     ],
     "license":"LGPL-3"
