@@ -18,9 +18,16 @@
             <form string="kilo_booking_form">
                 <sheet>
                     <group>
-                        <field name="partner_id"/>
-                        <field name="start_kilo"/>
-                        <field name="end_kilo"/>
+                        <group string="Booking Information">
+                            <field name="partner_id"/>
+                            <field name="start_kilo"/>
+                            <field name="end_kilo"/>
+                            <field name="total_kilo" readonly="1" force_save="1"/>
+                        </group>
+                        <group string="Car Information">
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
