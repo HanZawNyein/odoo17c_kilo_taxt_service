@@ -26,14 +26,19 @@
                 <sheet>
                     <group>
                         <group string="Booking Information">
-                            <field name="partner_id"/>
+                            <field name="partner_id" readonly="state != 'draft'"/>
                             <field name="start_kilo" readonly="1"/>
-                            <field name="end_kilo"/>
+                            <field name="end_kilo" readonly="1"/>
                             <field name="total_kilo" readonly="1" force_save="1"/>
                         </group>
                         <group string="Car Information">
-                            <field name="vehicle_id"/>
+                            <field name="vehicle_id" readonly="1"/>
                             <field name="driver_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" widget="monetary" readonly="1"/>
                         </group>
                     </group>
                 </sheet>

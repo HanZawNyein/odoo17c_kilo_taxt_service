@@ -7,6 +7,7 @@
 
         "views/kilo_booking.xml",
         "views/res_config_settings.xml",
+        "views/res_company.xml",
 
         "wizard/kilo_add_vehicle_wizard.xml",
         "wizard/kilo_arrived_wizard.xml",

@@ -21,10 +21,15 @@ class KiloBooking(models.Model):
         ('arrived', 'Arrived')
     ], default="draft")
 
+    company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
+    currency_id = fields.Many2one('res.currency',related="company_id.currency_id")
+    amount = fields.Monetary()#currency_field="company_currency_id")
+
     @api.onchange('end_kilo')
     def _on_change_end_kilo(self):
         if self.end_kilo:
             self.total_kilo = self.start_kilo + self.end_kilo
+            self.amount = self.total_kilo*self.company_id.kilo_per_mmk
 
     def action_rest_to_draft(self):
         self.state = 'draft'

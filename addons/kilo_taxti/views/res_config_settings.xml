@@ -12,6 +12,10 @@
                         <setting title="Start Kilo">
                             <field name="start_kilo"/>
                         </setting>
+                        <setting title="Kilo Per MMK">
+                            <field name="kilo_per_mmk" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </setting>
                     </block>
                 </app>
             </xpath>
