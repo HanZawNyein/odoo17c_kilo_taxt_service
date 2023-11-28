@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_kilo_booking,kilo.booking,model_kilo_booking,,1,1,1,1
+access_kilo_add_vehicle_wizard,kilo.add.vehicle.wizard,model_kilo_add_vehicle_wizard,,1,1,1,1
+access_kilo_arrived_wizard,kilo.arrived.wizard,model_kilo_arrived_wizard,,1,1,1,1

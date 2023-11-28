@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class KiloBooking(models.Model):
@@ -16,7 +16,9 @@ class KiloBooking(models.Model):
 
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('confirm', 'Confirm')
+        ('confirm', 'Confirm'),
+        ('accept', 'Accept'),
+        ('arrived', 'Arrived')
     ], default="draft")
 
     @api.onchange('end_kilo')
@@ -32,3 +34,23 @@ class KiloBooking(models.Model):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         start_kilo = ICPSudo.get_param('start_kilo')
         self.start_kilo = start_kilo
+
+    def action_accept(self):
+        return {
+            'name': _('Add Vehicle'),
+            'view_mode': 'form',
+            # 'domain': [('lost_reason_id', 'in', self.ids)],
+            'res_model': 'kilo.add.vehicle.wizard',
+            'type': 'ir.actions.act_window',
+            "target":"new"
+            # 'context': {'create': False, 'active_test': False},
+        }
+
+    def action_arrived(self):
+        return {
+            'name': _('Add End Kilo'),
+            'view_mode': 'form',
+            'res_model': 'kilo.arrived.wizard',
+            'type': 'ir.actions.act_window',
+            "target": "new"
+        }
