@@ -1,7 +1,7 @@
 {
     "name":"Kilo Taxi",
     "author":"Han Zaw Nyein",
-    "depends":["base","fleet"],
+    "depends":["base","fleet","account"],
     "data":[
         "security/ir.model.access.csv",
 

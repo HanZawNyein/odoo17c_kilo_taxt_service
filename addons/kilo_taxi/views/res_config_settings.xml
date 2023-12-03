@@ -20,6 +20,9 @@
                             <field name="kilo_service_fees" widget="monetary"/>
                             <field name="currency_id" invisible="1"/>
                         </setting>
+                        <setting title="Service Porudcts">
+                            <field name="kilo_service_product"/>
+                        </setting>
                     </block>
                 </app>
             </xpath>

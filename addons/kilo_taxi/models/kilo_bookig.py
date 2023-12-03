@@ -11,8 +11,8 @@ class KiloBooking(models.Model):
     end_kilo = fields.Float(copy=False)
     total_kilo = fields.Float(copy=False)
 
-    vehicle_id = fields.Many2one('fleet.vehicle',copy=False)
-    driver_id = fields.Many2one('res.partner', related="vehicle_id.driver_id",copy=False)
+    vehicle_id = fields.Many2one('fleet.vehicle', copy=False)
+    driver_id = fields.Many2one('res.partner', related="vehicle_id.driver_id", copy=False)
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -27,6 +27,7 @@ class KiloBooking(models.Model):
     amount = fields.Monetary(copy=False)  # currency_field="company_currency_id")
     service_fees = fields.Monetary(copy=False)  # currency_field="company_currency_id")
     date = fields.Datetime(default=lambda self: fields.Datetime.now())
+    move_id = fields.Many2one('account.move', copy=False)
 
     @api.onchange('end_kilo')
     def _on_change_end_kilo(self):
@@ -66,3 +67,20 @@ class KiloBooking(models.Model):
 
     def action_cancel(self):
         self.state = "cancel"
+
+    def _create_invoice(self):
+        self.state = "arrived"
+        domain = [('product_tmpl_id', '=', self.company_id.kilo_service_product.id)]
+        product_id = self.env['product.product'].search(domain=domain, limit=1)
+        vals = {
+            "partner_id": self.driver_id.id,
+            "move_type": "out_invoice",
+            "invoice_date": self.date.date(),
+            "currency_id": self.currency_id.id,
+            "invoice_line_ids": [
+                (0, 0, {"product_id": product_id.id, "price_unit": self.service_fees}),
+            ]
+        }
+        self.move_id = self.env['account.move'].create(vals)
+        self.move_id.action_post()
+        ...

@@ -6,6 +6,8 @@ class ResCompany(models.Model):
 
     kilo_per_mmk = fields.Monetary()
     kilo_service_fees = fields.Monetary()
+    kilo_service_product = fields.Many2one('product.template')
+
 
 
 class ResConfigSettings(models.TransientModel):
@@ -15,6 +17,7 @@ class ResConfigSettings(models.TransientModel):
     currency_id = fields.Many2one('res.currency', related="company_id.currency_id")
     kilo_per_mmk = fields.Monetary(related="company_id.kilo_per_mmk", readonly=False)
     kilo_service_fees = fields.Monetary(related="company_id.kilo_service_fees", readonly=False)
+    kilo_service_product = fields.Many2one('product.template',related="company_id.kilo_service_product", readonly=False)
     #  100
     # 200
 
