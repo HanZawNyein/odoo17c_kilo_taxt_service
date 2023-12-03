@@ -12,7 +12,6 @@
         "wizard/kilo_add_vehicle_wizard.xml",
         "wizard/kilo_arrived_wizard.xml",
 
-
         "views/menus.xml",
     ],
     "license":"LGPL-3"
