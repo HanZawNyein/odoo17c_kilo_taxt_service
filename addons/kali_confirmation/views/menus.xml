@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.client" id="kali_confirmation_client_action">
+        <field name="name">Confirmation</field>
+        <field name="tag">kali_confirmation.ConfirmationClientAction</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="kilo_confirmation_categ" name="" parent="kilo_taxi.kilo_taxi_root" action="kali_confirmation_client_action" sequence="10"/>
+</odoo>
