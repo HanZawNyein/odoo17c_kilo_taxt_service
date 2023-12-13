@@ -12,6 +12,17 @@
                         <setting title="Start Kilo">
                             <field name="start_kilo"/>
                         </setting>
+                        <setting title="1/Kilo Per MMK">
+                            <field name="kilo_per_mmk" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </setting>
+                        <setting title="Service Fees">
+                            <field name="kilo_service_fees" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </setting>
+                        <setting title="Service Porudcts">
+                            <field name="kilo_service_product"/>
+                        </setting>
                     </block>
                 </app>
             </xpath>

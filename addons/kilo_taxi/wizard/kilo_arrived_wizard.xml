@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="kilo_arrived_wizard_view_form" model="ir.ui.view">
+        <field name="name">kilo_arrived_wizard_view_form</field>
+        <field name="model">kilo.arrived.wizard</field>
+        <field name="arch" type="xml">
+            <form string="kilo_arrived_wizard_form">
+                <sheet>
+                    <group>
+                        <field name="end_kilo"/>
+
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_add_end_kilo" string="Add" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
