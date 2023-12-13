@@ -2,7 +2,7 @@
 
 import {registry} from "@web/core/registry";
 
-import {Component, useState,onWillStart} from "@odoo/owl";
+import {Component, useState, onWillStart} from "@odoo/owl";
 
 class ConfirmationClientAction extends Component {
     setup() {
@@ -11,13 +11,37 @@ class ConfirmationClientAction extends Component {
         })
         this.MODEL = "kilo.booking"
         this.orm = this.env.services.orm;
-        onWillStart(async ()=>{
-            await this.getAllConfirmation()
+        this.busService = this.env.services.bus_service;
+        this.busChannel = "kilo_taxi_services";
+
+
+        onWillStart(async () => {
+            await this.getAllConfirmation();
+            this.busService.addChannel(this.busChannel);
+            this.busService.subscribe('kilo.booking/action_confirm', (data) => {
+                this.addConfirmOrder(data);
+            });
+            this.busService.subscribe('kilo.booking/accept', (data) => {
+                // console.log(data);
+                this.removeAcceptOrder(data);
+            });
+            // this.busService.addEventListener('notification', (data) => {
+            //     console.log(data)
+            // });
         })
     }
 
+    removeAcceptOrder(data) {
+        this.states.confirmationList = this.states.confirmationList.filter((x) => x.id !== data.id)
+    }
+
+    addConfirmOrder(data) {
+        this.states.confirmationList.push(data)
+        // {'id':this.states.confirmationList.length,"partner_id"}
+    }
+
     async getAllConfirmation() {
-        this.states.confirmationList = await this.orm.searchRead(this.MODEL, [['state','=','confirm']], ['partner_id','date','start_kilo'])
+        this.states.confirmationList = await this.orm.searchRead(this.MODEL, [['state', '=', 'confirm']], ['partner_id', 'date', 'start_kilo'])
     }
 }
 

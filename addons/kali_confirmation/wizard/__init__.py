@@ -1,0 +1,1 @@
+from . import kilo_add_vehicle_wizard

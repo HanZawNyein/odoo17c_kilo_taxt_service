@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="kali_confirmation.Confirmation">
+<!--        <button t-on-click="addConfirmOrder" class="btn btn-primary">Add Confirm Order</button>-->
         <div class="container">
             <table class="table">
               <thead>
@@ -12,9 +13,8 @@
                 </tr>
               </thead>
                 <tbody>
-
                 <tr t-foreach="states.confirmationList" t-as="confirmation" t-key="confirmation.id">
-                  <th scope="row">1</th>
+                  <th scope="row"><t t-esc="confirmation.id"/></th>
                     <td><t t-esc="confirmation.date"/></td>
                     <td><t t-esc="confirmation.partner_id[1]"/></td>
                     <td><t t-esc="confirmation.start_kilo"/></td>
